@@ -9,10 +9,10 @@
     </p>
   </header>
 
-  <div class="artist-albums">
-    <div class="row">
+  <div class="row">
+    <div class="artist-albums col-sm-9">
       <div *ngFor="let album of albums">
-          <div class="col-sm-3">
+          <div class="col-sm-4">
             <div class="well album">
               <div *ngIf="album.images.length > 0">
                 <img class="album-thumb img-thumbnail" src="{{album.images[0].url}}" />
@@ -21,6 +21,12 @@
               <a class="btn btn-default btn-block" routerLink="/album/{{album.id}}">Album Details</a>
             </div>
           </div>
+      </div>
+    </div>
+    <div class="related-artists col-sm-3" *ngIf="relatedArtists">
+      <h3>Related Artists</h3>
+      <div *ngFor="let related of relatedArtists">
+        <a routerLink="/artist/{{related.id}}">{{related.name}}</a>
       </div>
     </div>
   </div>

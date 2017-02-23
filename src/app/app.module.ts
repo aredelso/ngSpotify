@@ -21,7 +21,7 @@ import { SongTimePipe } from './song-time.pipe';
     SearchComponent,
     ArtistComponent,
     AlbumComponent,
-    SongTimePipe
+    SongTimePipe,
   ],
   imports: [
     BrowserModule,
