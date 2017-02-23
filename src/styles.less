@@ -17,7 +17,6 @@
 }
 
 .artist-albums {
-
   .well {
     margin-bottom: 20px;
     overflow: auto;
@@ -40,12 +39,12 @@
   span {
     &:after {
       content: ", ";
-      &:last-child {
-        content: "";
-      }
-      &:nth-last-child(2) {
-        content: " & ";
-      }
+    }
+    &:last-child:after {
+      content: "";
+    }
+    &:nth-last-child(2):after {
+      content: " & ";
     }
   }
 }
