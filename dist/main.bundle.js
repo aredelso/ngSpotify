@@ -6,7 +6,7 @@ webpackJsonp([0,3],{
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(308);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__ = __webpack_require__(681);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__ = __webpack_require__(682);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SpotifyService; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -37,6 +37,11 @@ var SpotifyService = (function () {
             .map(function (res) { return res.json(); });
     };
     SpotifyService.prototype.getAlbums = function (artistId) {
+        this.albumsUrl = "https://api.spotify.com/v1/artists/" + artistId + "/albums";
+        return this._http.get(this.albumsUrl)
+            .map(function (res) { return res.json(); });
+    };
+    SpotifyService.prototype.getSingles = function (artistId) {
         this.albumsUrl = "https://api.spotify.com/v1/artists/" + artistId + "/albums";
         return this._http.get(this.albumsUrl)
             .map(function (res) { return res.json(); });
@@ -86,8 +91,8 @@ var AboutComponent = (function () {
     AboutComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_5" /* Component */])({
             selector: 'app-about',
-            template: __webpack_require__(673),
-            styles: [__webpack_require__(667)]
+            template: __webpack_require__(674),
+            styles: [__webpack_require__(668)]
         }), 
         __metadata('design:paramtypes', [])
     ], AboutComponent);
@@ -143,8 +148,8 @@ var AlbumComponent = (function () {
     AlbumComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_5" /* Component */])({
             selector: 'app-album',
-            template: __webpack_require__(674),
-            styles: [__webpack_require__(668)]
+            template: __webpack_require__(675),
+            styles: [__webpack_require__(669)]
         }), 
         __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__services_spotify_service__["a" /* SpotifyService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__services_spotify_service__["a" /* SpotifyService */]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["b" /* ActivatedRoute */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__angular_router__["b" /* ActivatedRoute */]) === 'function' && _b) || Object])
     ], AlbumComponent);
@@ -162,6 +167,8 @@ var AlbumComponent = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_spotify_service__ = __webpack_require__(151);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__(213);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_lodash__ = __webpack_require__(665);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_lodash__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ArtistComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -172,6 +179,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+
 
 
 
@@ -191,20 +199,23 @@ var ArtistComponent = (function () {
             });
             _this._spotifyService.getAlbums(id)
                 .subscribe(function (albums) {
-                _this.albums = albums.items;
+                _this.allAlbums = albums.items;
+                _this.albums = __WEBPACK_IMPORTED_MODULE_3_lodash__["filter"](_this.allAlbums, ['album_type', 'album']);
+                _this.singles = __WEBPACK_IMPORTED_MODULE_3_lodash__["filter"](_this.allAlbums, ['album_type', 'single']);
+                _this.comps = __WEBPACK_IMPORTED_MODULE_3_lodash__["filter"](_this.allAlbums, ['album_type', 'compilation']);
+                console.log(_this.albums);
             });
             _this._spotifyService.getRelatedArtists(id)
                 .subscribe(function (relatedArtists) {
                 _this.relatedArtists = relatedArtists.artists;
-                console.log(_this.relatedArtists);
             });
         });
     };
     ArtistComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_5" /* Component */])({
             selector: 'app-artist',
-            template: __webpack_require__(675),
-            styles: [__webpack_require__(669)]
+            template: __webpack_require__(676),
+            styles: [__webpack_require__(670)]
         }), 
         __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__services_spotify_service__["a" /* SpotifyService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__services_spotify_service__["a" /* SpotifyService */]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["b" /* ActivatedRoute */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__angular_router__["b" /* ActivatedRoute */]) === 'function' && _b) || Object])
     ], ArtistComponent);
@@ -249,8 +260,8 @@ var SearchComponent = (function () {
     SearchComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_5" /* Component */])({
             selector: 'app-search',
-            template: __webpack_require__(677),
-            styles: [__webpack_require__(671)]
+            template: __webpack_require__(678),
+            styles: [__webpack_require__(672)]
         }), 
         __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__services_spotify_service__["a" /* SpotifyService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__services_spotify_service__["a" /* SpotifyService */]) === 'function' && _a) || Object])
     ], SearchComponent);
@@ -321,8 +332,8 @@ var AppComponent = (function () {
     AppComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_5" /* Component */])({
             selector: 'app-root',
-            template: __webpack_require__(672),
-            styles: [__webpack_require__(666)]
+            template: __webpack_require__(673),
+            styles: [__webpack_require__(667)]
         }), 
         __metadata('design:paramtypes', [])
     ], AppComponent);
@@ -465,8 +476,8 @@ var NavbarComponent = (function () {
     NavbarComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_5" /* Component */])({
             selector: 'app-navbar',
-            template: __webpack_require__(676),
-            styles: [__webpack_require__(670)]
+            template: __webpack_require__(677),
+            styles: [__webpack_require__(671)]
         }), 
         __metadata('design:paramtypes', [])
     ], NavbarComponent);
@@ -577,7 +588,7 @@ var environment = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13_core_js_es6_reflect___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_13_core_js_es6_reflect__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14_core_js_es7_reflect__ = __webpack_require__(529);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14_core_js_es7_reflect___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_14_core_js_es7_reflect__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15_zone_js_dist_zone__ = __webpack_require__(694);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15_zone_js_dist_zone__ = __webpack_require__(696);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15_zone_js_dist_zone___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_15_zone_js_dist_zone__);
 
 
@@ -596,13 +607,6 @@ var environment = {
 
 
 //# sourceMappingURL=/home/andrew/Sites/angular/ng-spotify-aredelso/src/polyfills.js.map
-
-/***/ }),
-
-/***/ 666:
-/***/ (function(module, exports) {
-
-module.exports = ""
 
 /***/ }),
 
@@ -644,46 +648,53 @@ module.exports = ""
 /***/ 672:
 /***/ (function(module, exports) {
 
-module.exports = "<app-navbar></app-navbar>\n<div class=\"main\">\n  <div class=\"container\">\n    <router-outlet></router-outlet>\n  </div>\n</div>\n"
+module.exports = ""
 
 /***/ }),
 
 /***/ 673:
 /***/ (function(module, exports) {
 
-module.exports = "<p>\n  about works!\n</p>\n"
+module.exports = "<app-navbar></app-navbar>\n<div class=\"main\">\n  <div class=\"container\">\n    <router-outlet></router-outlet>\n  </div>\n</div>\n"
 
 /***/ }),
 
 /***/ 674:
 /***/ (function(module, exports) {
 
-module.exports = "<div id=\"album\" *ngIf=\"album\">\n  <header class=\"album-header\">\n    <div class=\"row\">\n      <div class=\"col-sm-4\">\n        <div *ngIf=\"album.images.length > 0\">\n          <img class=\"album-thumb\" src=\"{{album.images[0].url}}\" />\n        </div>\n      </div>\n      <div class=\"col-sm-8\">\n        <h4 class=\"artist-list\" *ngIf=\"album.artists.length > 0\"><span *ngFor=\"let artist of album.artists\">\n          {{artist.name}}\n        </span></h4>\n        <h2>{{album.name}}</h2>\n        <h5>Release Date: {{album.release_date | date}}</h5>\n        <a class=\"btn btn-primary\" href=\"{{album.external_urls.spotify}}\">View In Spotify</a>\n      </div>\n    </div>\n  </header>\n\n  <div class=\"album-tracks\">\n    <h2>Album Tracks</h2>\n    <div *ngFor=\"let track of album.tracks.items\" [ngClass]=\"{'is-playing': track.isPlaying}\">\n      <div class=\"track well\">\n        <i class=\"fa fa-play-circle-o\" (click)=\"playSong(track.preview_url); track.isPlaying = !track.isPlaying\" *ngIf=\"!track.isPlaying\"></i>\n        <i class=\"fa fa-pause-circle-o\" (click)=\"pauseSong(track.preview_url); track.isPlaying = !track.isPlaying\" *ngIf=\"track.isPlaying\"></i>\n        <div class=\"track-details\">\n          <h5>{{track.track_number}} - {{track.name}} ({{track.duration_ms | songTime}})</h5>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n"
+module.exports = "<p>\n  about works!\n</p>\n"
 
 /***/ }),
 
 /***/ 675:
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngIf=\"artist\">\n  <header class=\"artist-header\">\n    <div *ngIf=\"artist.images.length > 0\">\n      <img class=\"artist-thumb\" src=\"{{artist.images[0].url}}\"/>\n    </div>\n    <h1>{{artist.name}}</h1>\n    <p *ngIf=\"artist.genres.length > 0\">\n      Genres: <span artist *ngFor=\"let genre of artist.genres\">{{genre}} </span>\n    </p>\n  </header>\n\n  <div class=\"row\">\n    <div class=\"artist-albums col-sm-9\">\n      <div *ngFor=\"let album of albums\">\n          <div class=\"col-sm-4\">\n            <div class=\"well album\">\n              <div *ngIf=\"album.images.length > 0\">\n                <img class=\"album-thumb img-thumbnail\" src=\"{{album.images[0].url}}\" />\n              </div>\n              <h4>{{album.name}}</h4>\n              <a class=\"btn btn-default btn-block\" routerLink=\"/album/{{album.id}}\">Album Details</a>\n            </div>\n          </div>\n      </div>\n    </div>\n    <div class=\"related-artists col-sm-3\" *ngIf=\"relatedArtists\">\n      <h3>Related Artists</h3>\n      <div *ngFor=\"let related of relatedArtists\">\n        <a routerLink=\"/artist/{{related.id}}\">{{related.name}}</a>\n      </div>\n    </div>\n  </div>\n</div>\n"
+module.exports = "<div id=\"album\" *ngIf=\"album\">\n  <header class=\"album-header\">\n    <div class=\"row\">\n      <div class=\"col-sm-4\">\n        <div *ngIf=\"album.images.length > 0\">\n          <img class=\"album-thumb\" src=\"{{album.images[0].url}}\" />\n        </div>\n      </div>\n      <div class=\"col-sm-8\">\n        <h4 class=\"artist-list\" *ngIf=\"album.artists.length > 0\"><span *ngFor=\"let artist of album.artists\">\n          {{artist.name}}\n        </span></h4>\n        <h2>{{album.name}}</h2>\n        <h5>Release Date: {{album.release_date | date}}</h5>\n        <a class=\"btn btn-primary\" href=\"{{album.external_urls.spotify}}\">View In Spotify</a>\n      </div>\n    </div>\n  </header>\n\n  <div class=\"album-tracks\">\n    <h2>Album Tracks</h2>\n    <div *ngFor=\"let track of album.tracks.items\" [ngClass]=\"{'is-playing': track.isPlaying}\">\n      <div class=\"track well\">\n        <i class=\"fa fa-play-circle-o\" (click)=\"playSong(track.preview_url); track.isPlaying = !track.isPlaying\" *ngIf=\"!track.isPlaying\"></i>\n        <i class=\"fa fa-pause-circle-o\" (click)=\"pauseSong(track.preview_url); track.isPlaying = !track.isPlaying\" *ngIf=\"track.isPlaying\"></i>\n        <div class=\"track-details\">\n          <h5>{{track.track_number}} - {{track.name}} ({{track.duration_ms | songTime}})</h5>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n"
 
 /***/ }),
 
 /***/ 676:
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"navbar navbar-inverse\">\n  <div class=\"container\">\n    <div class=\"navbar-header\">\n      <button type=\"button\" class=\"navbar-toggle collapsed\" data-toggle=\"collapse\" data-target=\"#navbar\" aria-expanded=\"false\" aria-controls=\"navbar\">\n        <span class=\"sr-only\">Toggle navigation</span>\n        <span class=\"icon-bar\"></span>\n        <span class=\"icon-bar\"></span>\n        <span class=\"icon-bar\"></span>\n      </button>\n      <a class=\"navbar-brand\" href=\"#\">ngSpotify</a>\n    </div>\n    <div id=\"navbar\" class=\"collapse navbar-collapse\">\n      <ul class=\"nav navbar-nav\">\n        <li><a routerLink=\"/\" routerLinkActive=\"active\">Home</a></li>\n        <li><a routerLink=\"/about\" routerLinkActive=\"active\">About</a></li>\n      </ul>\n    </div><!--/.nav-collapse -->\n  </div>\n</nav>\n"
+module.exports = "<div *ngIf=\"artist\">\n  <header class=\"artist-header\">\n    <div *ngIf=\"artist.images.length > 0\">\n      <img class=\"artist-thumb\" src=\"{{artist.images[0].url}}\"/>\n    </div>\n    <h1>{{artist.name}}</h1>\n    <p *ngIf=\"artist.genres.length > 0\">\n      Genres: <span artist *ngFor=\"let genre of artist.genres\">{{genre}} </span>\n    </p>\n  </header>\n\n  <div class=\"row\">\n    <div class=\"artist-albums col-sm-9\">\n      <div *ngIf=\"albums != 0\">\n        <h5>Albums</h5>\n        <div *ngFor=\"let album of albums\">\n          <div class=\"col-sm-4\">\n            <div class=\"well album\">\n              <div *ngIf=\"album.images.length > 0\">\n                <img class=\"album-thumb img-thumbnail\" src=\"{{album.images[0].url}}\" />\n              </div>\n              <h4>{{album.name}}</h4>\n              <a class=\"btn btn-default btn-block\" routerLink=\"/album/{{album.id}}\">Album Details</a>\n            </div>\n          </div>\n        </div>\n      </div>\n      <div *ngIf=\"singles != 0\">\n        <h5>Singles</h5>\n        <div *ngFor=\"let single of singles\">\n          <div class=\"col-sm-4\">\n            <div class=\"well album\">\n              <div *ngIf=\"single.images.length > 0\">\n                <img class=\"album-thumb img-thumbnail\" src=\"{{single.images[0].url}}\" />\n              </div>\n              <h4>{{single.name}}</h4>\n              <a class=\"btn btn-default btn-block\" routerLink=\"/album/{{single.id}}\">Album Details</a>\n            </div>\n          </div>\n        </div>\n      </div>\n      <div *ngIf=\"comps != 0\">\n        <h5>Albums</h5>\n        <div *ngFor=\"let comp of comps\">\n          <div class=\"col-sm-4\">\n            <div class=\"well album\">\n              <div *ngIf=\"comp.images.length > 0\">\n                <img class=\"album-thumb img-thumbnail\" src=\"{{comp.images[0].url}}\" />\n              </div>\n              <h4>{{comp.name}}</h4>\n              <a class=\"btn btn-default btn-block\" routerLink=\"/album/{{comp.id}}\">Album Details</a>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n    <div class=\"related-artists col-sm-3\" *ngIf=\"relatedArtists\">\n      <h3>Related Artists</h3>\n      <div *ngFor=\"let related of relatedArtists\">\n        <a routerLink=\"/artist/{{related.id}}\">{{related.name}}</a>\n      </div>\n    </div>\n  </div>\n</div>\n"
 
 /***/ }),
 
 /***/ 677:
 /***/ (function(module, exports) {
 
+module.exports = "<nav class=\"navbar navbar-inverse\">\n  <div class=\"container\">\n    <div class=\"navbar-header\">\n      <button type=\"button\" class=\"navbar-toggle collapsed\" data-toggle=\"collapse\" data-target=\"#navbar\" aria-expanded=\"false\" aria-controls=\"navbar\">\n        <span class=\"sr-only\">Toggle navigation</span>\n        <span class=\"icon-bar\"></span>\n        <span class=\"icon-bar\"></span>\n        <span class=\"icon-bar\"></span>\n      </button>\n      <a class=\"navbar-brand\" href=\"#\">ngSpotify</a>\n    </div>\n    <div id=\"navbar\" class=\"collapse navbar-collapse\">\n      <ul class=\"nav navbar-nav\">\n        <li><a routerLink=\"/\" routerLinkActive=\"active\">Home</a></li>\n        <li><a routerLink=\"/about\" routerLinkActive=\"active\">About</a></li>\n      </ul>\n    </div><!--/.nav-collapse -->\n  </div>\n</nav>\n"
+
+/***/ }),
+
+/***/ 678:
+/***/ (function(module, exports) {
+
 module.exports = "<h1>Need Music?</h1>\n<p class=\"lead\">Use the ngSpotify app to browse new releases and find your favorite songs.</p>\n<form>\n  <div class=\"form-group\">\n    <input type=\"text\" name=\"searchStr\" (keyup)=\"searchMusic()\" [(ngModel)]=\"searchStr\" class=\"form-control\" placeholder=\"Search Music...\">\n  </div>\n</form>\n\n<div *ngIf=\"searchRes\">\n  <div *ngFor=\"let res of searchRes\">\n    <div class=\"row\">\n      <div class=\"col-sm-12\">\n        <div class=\"search-res well\">\n          <div *ngIf=\"res.images.length > 0\">\n            <img class=\"search-thumb\" src=\"{{res.images[0].url}}\"/>\n          </div>\n          <h4><a routerLink=\"/artist/{{res.id}}\">{{res.name}}</a></h4>\n          <div class=\"genres\" *ngIf=\"res.genres.length > 0\">\n            <strong>Genres: </strong>\n            <span *ngFor=\"let genre of res.genres\">{{genre}}</span>\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n"
 
 /***/ }),
 
-/***/ 695:
+/***/ 697:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(391);
@@ -691,5 +702,5 @@ module.exports = __webpack_require__(391);
 
 /***/ })
 
-},[695]);
+},[697]);
 //# sourceMappingURL=main.bundle.map
