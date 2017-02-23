@@ -18,8 +18,9 @@
       "prefix": "app",
       "mobile": false,
       "styles": [
+        "assets/less/prefixer.less",
         "styles.css",
-        "styles.less"
+        "assets/less/styles.less"
       ],
       "scripts": [],
       "environments": {

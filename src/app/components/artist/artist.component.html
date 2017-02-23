@@ -12,43 +12,49 @@
   <div class="row">
     <div class="artist-albums col-sm-9">
       <div *ngIf="albums != 0">
-        <h5>Albums</h5>
-        <div *ngFor="let album of albums">
-          <div class="col-sm-4">
-            <div class="well album">
-              <div *ngIf="album.images.length > 0">
-                <img class="album-thumb img-thumbnail" src="{{album.images[0].url}}" />
+        <div class="albums-group">
+          <h5>Albums</h5>
+          <div *ngFor="let album of albums">
+            <div class="col-sm-4">
+              <div class="well album">
+                <div *ngIf="album.images.length > 0">
+                  <img class="album-thumb img-thumbnail" src="{{album.images[0].url}}" />
+                </div>
+                <h4>{{album.name}}</h4>
+                <a class="btn btn-default btn-block" routerLink="/album/{{album.id}}">Album Details</a>
               </div>
-              <h4>{{album.name}}</h4>
-              <a class="btn btn-default btn-block" routerLink="/album/{{album.id}}">Album Details</a>
             </div>
           </div>
         </div>
       </div>
       <div *ngIf="singles != 0">
-        <h5>Singles</h5>
-        <div *ngFor="let single of singles">
-          <div class="col-sm-4">
-            <div class="well album">
-              <div *ngIf="single.images.length > 0">
-                <img class="album-thumb img-thumbnail" src="{{single.images[0].url}}" />
+        <div class="albums-group">
+          <h5>Singles</h5>
+          <div *ngFor="let single of singles">
+            <div class="col-sm-4">
+              <div class="well album">
+                <div *ngIf="single.images.length > 0">
+                  <img class="album-thumb img-thumbnail" src="{{single.images[0].url}}" />
+                </div>
+                <h4>{{single.name}}</h4>
+                <a class="btn btn-default btn-block" routerLink="/album/{{single.id}}">Album Details</a>
               </div>
-              <h4>{{single.name}}</h4>
-              <a class="btn btn-default btn-block" routerLink="/album/{{single.id}}">Album Details</a>
             </div>
           </div>
         </div>
       </div>
       <div *ngIf="comps != 0">
-        <h5>Albums</h5>
-        <div *ngFor="let comp of comps">
-          <div class="col-sm-4">
-            <div class="well album">
-              <div *ngIf="comp.images.length > 0">
-                <img class="album-thumb img-thumbnail" src="{{comp.images[0].url}}" />
+        <div class="albums-group">
+          <h5>Albums</h5>
+          <div *ngFor="let comp of comps">
+            <div class="col-sm-4">
+              <div class="well album">
+                <div *ngIf="comp.images.length > 0">
+                  <img class="album-thumb img-thumbnail" src="{{comp.images[0].url}}" />
+                </div>
+                <h4>{{comp.name}}</h4>
+                <a class="btn btn-default btn-block" routerLink="/album/{{comp.id}}">Album Details</a>
               </div>
-              <h4>{{comp.name}}</h4>
-              <a class="btn btn-default btn-block" routerLink="/album/{{comp.id}}">Album Details</a>
             </div>
           </div>
         </div>
