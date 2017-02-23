@@ -2,6 +2,18 @@
   border-bottom: #333 1px solid;
   padding: 30px 0;
 }
+input#search {
+  background-color: transparent;
+  border: none;
+  border-radius: 0px;
+  border-bottom: 1px solid;
+  -webkit-transition: .25s ease all;
+  transition: .25s ease all;
+}
+input#search:focus {
+  box-shadow: none;
+  border-color: #3f9dcb;
+}
 .search-res {
   height: 140px;
 }
@@ -27,7 +39,13 @@
   float: left;
   margin-right: 10px;
 }
-.artist-albums .well {
+.artist-albums .albums-group {
+  float: left;
+}
+.artist-albums .albums-group h5 {
+  padding: 0 15px;
+}
+.artist-albums .albums-group .well {
   margin-bottom: 20px;
   overflow: auto;
   min-height: 400px;
