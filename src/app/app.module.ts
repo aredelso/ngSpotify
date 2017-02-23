@@ -11,6 +11,7 @@ import { SearchComponent } from './components/search/search.component';
 import { SpotifyService } from './services/spotify.service';
 import { ArtistComponent } from './components/artist/artist.component';
 import { AlbumComponent } from './components/album/album.component';
+import { SongTimePipe } from './song-time.pipe';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { AlbumComponent } from './components/album/album.component';
     AboutComponent,
     SearchComponent,
     ArtistComponent,
-    AlbumComponent
+    AlbumComponent,
+    SongTimePipe
   ],
   imports: [
     BrowserModule,

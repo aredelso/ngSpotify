@@ -12,6 +12,7 @@ import { ActivatedRoute } from '@angular/router';
 export class AlbumComponent implements OnInit {
   id:string;
   album: Album[];
+  audio: any;
 
   constructor(
     private _spotifyService:SpotifyService,
@@ -27,6 +28,15 @@ export class AlbumComponent implements OnInit {
             this.album = album;
           })
       })
+  }
+
+  playSong(src) {
+    this.audio = new Audio(src);
+    this.audio.play();
+  }
+
+  pauseSong(src) {
+    this.audio.pause();
   }
 
 }
