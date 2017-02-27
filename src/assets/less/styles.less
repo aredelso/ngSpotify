@@ -5,6 +5,10 @@
   padding: 30px 0;
 }
 
+.btn-back {
+  margin-bottom: 20px;
+}
+
 input#search {
   background-color: transparent;
   border: none;
@@ -54,9 +58,6 @@ input#search {
   .albums-group {
     display: inline;
     float: left;
-    h5 {
-      padding: 0 15px;
-    }
     .row-eq-height{
       display: flex;
       flex-wrap: wrap;
@@ -106,6 +107,16 @@ input#search {
     }
     &:nth-last-child(2):after {
       content: " & ";
+    }
+    a {
+      text-decoration: none;
+      transition: .25s ease all;
+      color: #fff;
+      &:hover {
+        text-decoration: none;
+        cursor: pointer;
+        color: #2a9fd6;
+      }
     }
   }
 }

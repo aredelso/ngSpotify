@@ -1,3 +1,8 @@
+<div class="row">
+  <div class="col-sm-12">
+    <button class="btn btn-primary btn-back" (click)="this._location.back()"><i class="fa fa-long-arrow-left"></i> Back to Artist</button>
+  </div>
+</div>
 <div id="album" *ngIf="album">
   <header class="album-header">
     <div class="row">
@@ -8,7 +13,7 @@
       </div>
       <div class="col-sm-8">
         <h4 class="artist-list" *ngIf="album.artists.length > 0"><span *ngFor="let artist of album.artists">
-          {{artist.name}}
+          <a href="artist/{{artist.id}}">{{artist.name}}</a>
         </span></h4>
         <h2>{{album.name}}</h2>
         <h5>Release Date: {{album.release_date | date}}</h5>
@@ -21,8 +26,9 @@
     <h2>Album Tracks</h2>
     <div *ngFor="let track of album.tracks.items" [ngClass]="{'is-playing': track.isPlaying}">
       <div class="track well">
-        <i class="fa fa-play-circle-o" (click)="playSong(track.preview_url); track.isPlaying = !track.isPlaying" *ngIf="!track.isPlaying"></i>
-        <i class="fa fa-pause-circle-o" (click)="pauseSong(track.preview_url); track.isPlaying = !track.isPlaying" *ngIf="track.isPlaying"></i>
+        <i class="fa fa-play-circle-o play" (click)="playSong(track.name); track.isPlaying = !track.isPlaying" *ngIf="!track.isPlaying"></i>
+        <i class="fa fa-pause-circle-o pause" (click)="playSong(track.name, false); track.isPlaying = !track.isPlaying" *ngIf="track.isPlaying"></i>
+        <audio id="audio-{{track.name}}" src="{{track.preview_url}}"></audio>
         <div class="track-details">
           <h5>{{track.track_number}} - {{track.name}} ({{track.duration_ms | songTime}})</h5>
         </div>

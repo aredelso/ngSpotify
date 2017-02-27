@@ -3,6 +3,8 @@ import { SpotifyService } from '../../services/spotify.service';
 import { Artist } from '../../../Artist';
 import { Album } from '../../../Album';
 import { ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-album',
@@ -12,11 +14,12 @@ import { ActivatedRoute } from '@angular/router';
 export class AlbumComponent implements OnInit {
   id:string;
   album: Album[];
-  audio: any;
+  track: any;
 
   constructor(
     private _spotifyService:SpotifyService,
-    private _route:ActivatedRoute
+    private _route:ActivatedRoute,
+    private _location: Location
   ) { }
 
   ngOnInit() {
@@ -30,13 +33,13 @@ export class AlbumComponent implements OnInit {
       })
   }
 
-  playSong(src) {
-    this.audio = new Audio(src);
-    this.audio.play();
-  }
-
-  pauseSong(src) {
-    this.audio.pause();
+  playSong(track_name, paused = true) {
+    this.track = document.getElementById(`audio-${track_name}`);
+    if (paused) {
+      this.track.play();
+    } else {
+      this.track.pause();
+    }
   }
 
 }

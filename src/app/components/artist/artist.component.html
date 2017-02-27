@@ -27,6 +27,22 @@
           </div>
         </div>
       </div>
+      <div *ngIf="eps != 0">
+        <div class="albums-group col-sm-12">
+          <h5>EPs</h5>
+          <div class="row row-eq-height">
+            <div *ngFor="let ep of eps" class="col-sm-4 album">
+              <div class="well">
+                <div *ngIf="ep.images.length > 0">
+                  <img class="album-thumb img-thumbnail" src="{{ep.images[0].url}}" />
+                </div>
+                <h4>{{single.name}}</h4>
+                <a class="btn btn-default btn-block" routerLink="/album/{{ep.id}}">Album Details</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       <div *ngIf="singles != 0">
         <div class="albums-group col-sm-12">
           <h5>Singles</h5>
@@ -55,6 +71,22 @@
                 <h4>{{comp.name}}</h4>
                 <a class="btn btn-default btn-block" routerLink="/album/{{comp.id}}">Album Details</a>
               </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="appears_on != 0">
+      <div class="albums-group col-sm-12">
+        <h5>Appears On</h5>
+        <div class="row row-eq-height">
+          <div *ngFor="let appears of appears_on" class="col-sm-4 album">
+            <div class="well">
+              <div *ngIf="appears.images.length > 0">
+                <img class="album-thumb img-thumbnail" src="{{appears.images[0].url}}" />
+              </div>
+              <h4>{{comp.name}}</h4>
+              <a class="btn btn-default btn-block" routerLink="/album/{{appears.id}}">Album Details</a>
             </div>
           </div>
         </div>

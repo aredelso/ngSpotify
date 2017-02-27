@@ -18,6 +18,9 @@ export class ArtistComponent implements OnInit {
   albums: Album[];
   singles: Album[];
   comps: Album[];
+  eps: Album[];
+  appears_on: Album[];
+  album_types = [this.albums, this.singles, this.comps, this.eps, this.appears_on];
   relatedArtists: RelatedArtist[];
 
   constructor(
@@ -38,8 +41,10 @@ export class ArtistComponent implements OnInit {
           .subscribe(albums => {
             this.allAlbums = albums.items;
             this.albums = _.filter(this.allAlbums, ['album_type', 'album']);
+            this.eps = _.filter(this.allAlbums, ['album_type', 'eps']);
             this.singles = _.filter(this.allAlbums, ['album_type', 'single']);
             this.comps = _.filter(this.allAlbums, ['album_type', 'compilation']);
+            this.appears_on = _.filter(this.allAlbums, ['album_type', 'appears_on']);
             console.log(this.albums);
           })
         this._spotifyService.getRelatedArtists(id)
