@@ -15,7 +15,7 @@
         <div class="albums-group col-sm-12">
           <h5>Albums</h5>
           <div class="row row-eq-height">
-            <div *ngFor="let album of albums" class="col-sm-4 album">
+            <div *ngFor="let album of albums" class="col-md-4 col-sm-6 album">
               <div class="well">
                 <div *ngIf="album.images.length > 0">
                   <img class="album-thumb img-thumbnail" src="{{album.images[0].url}}" />

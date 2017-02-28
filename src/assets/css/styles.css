@@ -69,7 +69,6 @@ input#search:focus {
 }
 .artist-albums .albums-group .row-eq-height .album .well {
   overflow: auto;
-  min-height: 100%;
   text-align: center;
   background: #0e0e0e;
   padding: 10px 20px;
