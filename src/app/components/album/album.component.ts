@@ -33,12 +33,16 @@ export class AlbumComponent implements OnInit {
       })
   }
 
-  playSong(track_name, paused = true) {
-    this.track = document.getElementById(`audio-${track_name}`);
-    if (paused) {
+  playSong(track_id) {
+    this.track = document.getElementById(`audio-${track_id}`);
+    if (this.track.paused) {
       this.track.play();
+      $(`#play-${track_id}`).addClass('fa-pause-circle-o');
+      $(`#play-${track_id}`).removeClass('fa-play-circle-o');
     } else {
       this.track.pause();
+      $(`#play-${track_id}`).addClass('fa-play-circle-o');
+      $(`#play-${track_id}`).removeClass('fa-pause-circle-o');
     }
   }
 

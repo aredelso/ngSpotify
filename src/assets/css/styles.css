@@ -111,7 +111,11 @@ input#search:focus {
   cursor: pointer;
   color: #2a9fd6;
 }
-.is-playing .track .track-details {
+.album-tracks {
+  margin-top: 16px;
+}
+.is-playing .track .track-details,
+.is-playing .track .ended {
   margin-left: 0;
 }
 .track {

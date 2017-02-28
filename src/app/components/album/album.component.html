@@ -16,21 +16,20 @@
           <a href="artist/{{artist.id}}">{{artist.name}}</a>
         </span></h4>
         <h2>{{album.name}}</h2>
-        <h5>Release Date: {{album.release_date | date}}</h5>
+        <h5>Release Date: {{album.release_date_precision === 'year' ? (album.release_date) : (album.release_date | date)}}</h5>
         <a class="btn btn-primary" href="{{album.external_urls.spotify}}">View In Spotify</a>
       </div>
     </div>
   </header>
 
   <div class="album-tracks">
-    <h2>Album Tracks</h2>
+    <h5>Album Tracks</h5>
     <div *ngFor="let track of album.tracks.items" [ngClass]="{'is-playing': track.isPlaying}">
       <div class="track well">
-        <i class="fa fa-play-circle-o play" (click)="playSong(track.name); track.isPlaying = !track.isPlaying" *ngIf="!track.isPlaying"></i>
-        <i class="fa fa-pause-circle-o pause" (click)="playSong(track.name, false); track.isPlaying = !track.isPlaying" *ngIf="track.isPlaying"></i>
-        <audio id="audio-{{track.name}}" src="{{track.preview_url}}"></audio>
-        <div class="track-details">
-          <h5>{{track.track_number}} - {{track.name}} ({{track.duration_ms | songTime}})</h5>
+        <i class="fa fa-play-circle-o" id="play-{{track.id}}" (click)="playSong(track.id); track.isPlaying = !track.isPlaying"></i>
+        <audio id="audio-{{track.id}}" src="{{track.preview_url}}"></audio>
+        <div id="details-{{track.id}}" class="track-details">
+          <h5>{{track.track_number}} - {{track.name}} ({{track.duration_ms | songTime}}) <span *ngIf="album.artists[0].name === 'Various Artists'"> - {{track.artists[0].name}}</span></h5>
         </div>
       </div>
     </div>
